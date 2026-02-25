@@ -5,6 +5,15 @@ import MortgageCalculator from './components/MortgageCalculator';
 import AmortizationSchedule from './components/AmortizationSchedule';
 import PaymentBreakdown from './components/PaymentBreakdown';
 import AffordabilityCalculator from './components/AffordabilityCalculator';
+import { HeaderAd, FooterAd, InContentAd } from '@/components/monetization/AdSense';
+
+// AdSense configuration - replace with actual values when available
+const ADSENSE_CLIENT = 'ca-pub-XXXXXXXXXXXXXXXX';
+const ADSENSE_SLOTS = {
+  header: 'XXXXXXXXXX',
+  footer: 'XXXXXXXXXX',
+  content: 'XXXXXXXXXX'
+};
 
 export default function Home() {
   const [loanAmount, setLoanAmount] = useState(400000);
@@ -39,6 +48,19 @@ export default function Home() {
   // Calculate total interest
   const totalInterest = (monthlyPayment * numPayments) - principal;
 
+  // Add AdSense script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_CLIENT;
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -49,8 +71,13 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Navigation Tabs */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      {/* Header Ad */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <HeaderAd client={ADSENSE_CLIENT} slot={ADSENSE_SLOTS.header} />
+      </div>
+
+      {/* Tab Navigation */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div className="border-b border-gray-200">
           <nav className="-mb-px flex space-x-8">
             <button
@@ -100,27 +127,33 @@ export default function Home() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {activeTab === 'calculator' && (
-          <MortgageCalculator
-            loanAmount={loanAmount}
-            setLoanAmount={setLoanAmount}
-            downPayment={downPayment}
-            setDownPayment={setDownPayment}
-            interestRate={interestRate}
-            setInterestRate={setInterestRate}
-            loanTerm={loanTerm}
-            setLoanTerm={setLoanTerm}
-            propertyTax={propertyTax}
-            setPropertyTax={setPropertyTax}
-            homeInsurance={homeInsurance}
-            setHomeInsurance={setHomeInsurance}
-            hoaFees={hoaFees}
-            setHoaFees={setHoaFees}
-            monthlyPayment={monthlyPayment}
-            monthlyPMI={monthlyPMI}
-            totalMonthlyPayment={totalMonthlyPayment}
-            totalInterest={totalInterest}
-            principal={principal}
-          />
+          <>
+            <MortgageCalculator
+              loanAmount={loanAmount}
+              setLoanAmount={setLoanAmount}
+              downPayment={downPayment}
+              setDownPayment={setDownPayment}
+              interestRate={interestRate}
+              setInterestRate={setInterestRate}
+              loanTerm={loanTerm}
+              setLoanTerm={setLoanTerm}
+              propertyTax={propertyTax}
+              setPropertyTax={setPropertyTax}
+              homeInsurance={homeInsurance}
+              setHomeInsurance={setHomeInsurance}
+              hoaFees={hoaFees}
+              setHoaFees={setHoaFees}
+              monthlyPayment={monthlyPayment}
+              monthlyPMI={monthlyPMI}
+              totalMonthlyPayment={totalMonthlyPayment}
+              totalInterest={totalInterest}
+              principal={principal}
+            />
+            {/* In-content ad after calculator */}
+            <div className="mt-8">
+              <InContentAd client={ADSENSE_CLIENT} slot={ADSENSE_SLOTS.content} />
+            </div>
+          </>
         )}
         
         {activeTab === 'schedule' && (
@@ -150,8 +183,13 @@ export default function Home() {
         )}
       </main>
 
+      {/* Footer Ad */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <FooterAd client={ADSENSE_CLIENT} slot={ADSENSE_SLOTS.footer} />
+      </div>
+
       {/* Footer */}
-      <footer className="bg-white mt-16">
+      <footer className="bg-white mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-gray-200">
           <p className="text-center text-gray-500 text-sm">
             © 2026 Mortgage Calculator. This calculator provides estimates for informational purposes only.
