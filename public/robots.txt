@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://larrys-world.github.io/mortgage-calculator/sitemap.xml
