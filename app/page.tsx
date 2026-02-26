@@ -6,7 +6,7 @@ import AmortizationSchedule from './components/AmortizationSchedule';
 import PaymentBreakdown from './components/PaymentBreakdown';
 import AffordabilityCalculator from './components/AffordabilityCalculator';
 import { HeaderAd, FooterAd, InContentAd } from '@/components/monetization/AdSense';
-import RelatedTools from './RelatedTools';
+import { RelatedTools } from './RelatedTools';
 
 // AdSense configuration - replace with actual values when available
 const ADSENSE_CLIENT = 'ca-pub-XXXXXXXXXXXXXXXX';
