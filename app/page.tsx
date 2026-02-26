@@ -6,6 +6,7 @@ import AmortizationSchedule from './components/AmortizationSchedule';
 import PaymentBreakdown from './components/PaymentBreakdown';
 import AffordabilityCalculator from './components/AffordabilityCalculator';
 import { HeaderAd, FooterAd, InContentAd } from '@/components/monetization/AdSense';
+import RelatedTools from './RelatedTools';
 
 // AdSense configuration - replace with actual values when available
 const ADSENSE_CLIENT = 'ca-pub-XXXXXXXXXXXXXXXX';
@@ -183,8 +184,13 @@ export default function Home() {
         )}
       </main>
 
+      {/* Related Tools Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <RelatedTools currentTool="mortgage-calculator" />
+      </div>
+
       {/* Footer Ad */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
         <FooterAd client={ADSENSE_CLIENT} slot={ADSENSE_SLOTS.footer} />
       </div>
 
